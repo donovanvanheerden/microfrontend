@@ -1,0 +1,8 @@
+{
+  "private": true,
+  "workspaces": [
+    "cart",
+    "container",
+    "products"
+  ]
+}
