@@ -1,8 +1,6 @@
 {
   "private": true,
   "workspaces": [
-    "cart",
-    "container",
-    "products"
+    "ecommerce-app/*"
   ]
 }
