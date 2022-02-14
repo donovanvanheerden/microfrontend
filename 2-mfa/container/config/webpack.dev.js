@@ -9,17 +9,16 @@ const packageJson = require('../package.json');
 module.exports = merge(common, {
   mode: 'development',
   devServer: {
-    port: 8081,
+    port: 8080,
     historyApiFallback: {
       index: 'index.html'
     }
   },
   plugins: [
     new ModuleFederationPlugin({
-      name: 'marketing',
-      filename: 'remoteEntry.js',
-      exposes: {
-        './MarketingApp': './src/bootstrap'
+      name: 'container',
+      remotes: {
+        marketing: 'marketing@http://localhost:8081/remoteEntry.js'
       },
       shared: packageJson.dependencies,
     }),
