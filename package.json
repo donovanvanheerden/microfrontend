@@ -1,6 +1,7 @@
 {
   "private": true,
   "workspaces": [
-    "ecommerce-app/*"
+    "1-ecommerce/*",
+    "2-mfa/*"
   ]
 }

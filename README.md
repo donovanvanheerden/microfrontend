@@ -2,4 +2,5 @@
 
 ## Tutorial from [Udemy](https://www.udemy.com/course/microfrontend-course/)
 
- - [E-Commerce App](ecommerce-app/)
+ - [E-Commerce App](1-ecommerce/)
+ - [MFA](2-mfa/)
