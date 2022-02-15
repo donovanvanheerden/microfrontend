@@ -1,15 +1,15 @@
-name: Container Workflow
+name: Marketing Workflow
 
 on:
   push:
     branches:
       - main
     paths:
-      - '2-mfa/container/**'
+      - '2-mfa/marketing/**'
 
 defaults:
   run:
-    working-directory: 2-mfa/container
+    working-directory: 2-mfa/marketing
 
 jobs:
   build:
@@ -26,10 +26,8 @@ jobs:
         run: yarn
         working-directory: 2-mfa
 
-      - name: Build container
+      - name: Build marketing
         run: yarn build
-        env:
-          PRODUCTION_DOMAIN: ${{ secrets.PRODUCTION_DOMAIN }}
 
       - name: Configure AWS CLI
         uses: aws-actions/configure-aws-credentials@v1
@@ -39,7 +37,7 @@ jobs:
           aws-region: eu-central-1
 
       - name: Copy files to AWS S3
-        run: aws s3 sync dist s3://${{ secrets.AWS_S3_BUCKET_NAME }}/container/latest
+        run: aws s3 sync dist s3://${{ secrets.AWS_S3_BUCKET_NAME }}/marketing/latest
 
-      - name: Invalidate index.html
-        run: aws cloudfront create-invalidation --distribution-id ${{ secrets.AWS_DISTRIBUTION_ID }} --paths "/container/latest/index.html"
+      - name: Invalidate remoteEntry.js
+        run: aws cloudfront create-invalidation --distribution-id ${{ secrets.AWS_DISTRIBUTION_ID }} --paths "/marketing/latest/remoteEntry.js"
