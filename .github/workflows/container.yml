@@ -24,6 +24,7 @@ jobs:
 
       - name: Install dependencies
         run: yarn
+        working-directory: 2-mfa
 
       - name: Build container
         run: yarn build
