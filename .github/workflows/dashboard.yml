@@ -1,15 +1,15 @@
-name: Auth Workflow
+name: Dashboard Workflow
 
 on:
   push:
     branches:
       - main
     paths:
-      - '2-mfa/auth/**'
+      - '2-mfa/dashboard/**'
 
 defaults:
   run:
-    working-directory: 2-mfa/auth
+    working-directory: 2-mfa/dashboard
 
 jobs:
   build:
@@ -26,7 +26,7 @@ jobs:
         run: yarn
         working-directory: 2-mfa
 
-      - name: Build auth
+      - name: Build dashboard
         run: yarn build
 
       - name: Configure AWS CLI
@@ -37,7 +37,7 @@ jobs:
           aws-region: eu-central-1
 
       - name: Copy files to AWS S3
-        run: aws s3 sync dist s3://${{ secrets.AWS_S3_BUCKET_NAME }}/auth/latest
+        run: aws s3 sync dist s3://${{ secrets.AWS_S3_BUCKET_NAME }}/dashboard/latest
 
       - name: Invalidate remoteEntry.js
-        run: aws cloudfront create-invalidation --distribution-id ${{ secrets.AWS_DISTRIBUTION_ID }} --paths "/auth/latest/remoteEntry.js"
+        run: aws cloudfront create-invalidation --distribution-id ${{ secrets.AWS_DISTRIBUTION_ID }} --paths "/dashboard/latest/remoteEntry.js"
